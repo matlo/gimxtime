@@ -9,5 +9,5 @@
 gtime gtime_gettime() {
     struct timespec tv;
     clock_gettime(CLOCK_MONOTONIC, &tv);
-    return tv.tv_sec * 1000000ULL + tv.tv_nsec / 1000ULL;
+    return tv.tv_sec * 1000000ULL + tv.tv_nsec;
 }

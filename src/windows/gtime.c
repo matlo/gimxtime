@@ -17,5 +17,5 @@ gtime gtime_gettime() {
     LARGE_INTEGER tnow;
     QueryPerformanceCounter(&tnow);
 
-    return tnow.QuadPart * 1000000ULL / freq.QuadPart;
+    return tnow.QuadPart * 1000000000ULL / freq.QuadPart;
 }

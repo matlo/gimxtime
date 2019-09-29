@@ -11,11 +11,15 @@ typedef unsigned long int gtimepart;
 typedef long long int gtimediff;
 
 /*
- * Get current time. Value is monotonic and not bound to system time.
+ * Get current time as nanoseconds. Value is monotonic and not bound to system time.
  */
 gtime gtime_gettime();
 
-#define GTIME_SECPART(T) ((gtimepart)(T / 1000000UL))
-#define GTIME_USECPART(T) ((gtimepart)(T % 1000000UL))
+#define GTIME_SEC(T) ((T) / 1000000000UL)
+#define GTIME_USEC(T) ((T) / 1000UL)
+
+#define GTIME_SECPART(T) ((gtimepart)((T) / 1000000000UL))
+#define GTIME_NSECPART(T) ((gtimepart)((T) % 1000000000UL))
+#define GTIME_USECPART(T) (GTIME_NSECPART(T) / 1000UL)
 
 #endif /* GTIME_H_ */
