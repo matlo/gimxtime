@@ -14,7 +14,7 @@
 typedef unsigned long long int gtime;
 
 /*
- * Use this type to store the seconds or nanosecond part of gtime.
+ * Use this type to store the seconds or nanoseconds part of gtime.
  */
 typedef unsigned long int gtimepart;
 
@@ -24,18 +24,62 @@ typedef unsigned long int gtimepart;
  */
 typedef long long int gtimediff;
 
+/*
+ * gtime resolution is  1 nanosecond.
+ */
 #define GTIME_RESOLUTION 1000000000UL
+
+/*
+ * gtime format specifier.
+ */
+#ifdef WIN32
+#define GTIME_FS "%I64u"
+#else
+#define GTIME_FS "%llu"
+#endif
+
+/*
+ * gtimepart format specifier.
+ */
+#define GTIMEPART_FS "%lu"
+
+/*
+ * gtimediff format specifier.
+ */
+#ifdef WIN32
+#define GTIMEDIFF_FS "%I64d"
+#else
+#define GTIMEDIFF_FS "%lld"
+#endif
 
 /*
  * Get current time as nanoseconds. Value is monotonic and not bound to system time.
  */
 gtime gtime_gettime();
 
+/*
+ * Convert gtime to seconds.
+ */
 #define GTIME_SEC(T) ((T) / GTIME_RESOLUTION)
+
+/*
+ * Convert gtime to microseconds.
+ */
 #define GTIME_USEC(T) ((T) / 1000UL)
 
+/*
+ * Get the seconds part from gtime.
+ */
 #define GTIME_SECPART(T) ((gtimepart)((T) / GTIME_RESOLUTION))
+
+/*
+ * Get the nanoseconds part from gtime.
+ */
 #define GTIME_NSECPART(T) ((gtimepart)((T) % GTIME_RESOLUTION))
+
+/*
+ * Get the microseconds part from gtime.
+ */
 #define GTIME_USECPART(T) (GTIME_NSECPART(T) / 1000UL)
 
 #endif /* GTIME_H_ */
