@@ -33,7 +33,7 @@ typedef long long int gtimediff;
  * gtime format specifier.
  */
 #ifdef WIN32
-#define GTIME_FS "%I64u"
+#define GTIME_FS "%I64llu"
 #else
 #define GTIME_FS "%llu"
 #endif
@@ -47,15 +47,23 @@ typedef long long int gtimediff;
  * gtimediff format specifier.
  */
 #ifdef WIN32
-#define GTIMEDIFF_FS "%I64d"
+#define GTIMEDIFF_FS "%I64lld"
 #else
 #define GTIMEDIFF_FS "%lld"
+#endif
+
+#ifdef __cplusplus
+extern "C" {
 #endif
 
 /*
  * Get current time as nanoseconds. Value is monotonic and not bound to system time.
  */
 gtime gtime_gettime();
+
+#ifdef __cplusplus
+}
+#endif
 
 /*
  * Convert gtime to seconds.
