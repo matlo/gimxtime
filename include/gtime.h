@@ -1,10 +1,14 @@
 /*
- Copyright (c) 2019 Mathieu Laurendeau <mat.lau@laposte.net>
+ Copyright (c) 2020 Mathieu Laurendeau <mat.lau@laposte.net>
  License: GPLv3
  */
 
 #ifndef GTIME_H_
 #define GTIME_H_
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 /*
  * Use this type to store the result of gtime_gettime(),
@@ -33,7 +37,7 @@ typedef long long int gtimediff;
  * gtime format specifier.
  */
 #ifdef WIN32
-#define GTIME_FS "%I64llu"
+#define GTIME_FS "%I64u"
 #else
 #define GTIME_FS "%llu"
 #endif
@@ -47,23 +51,15 @@ typedef long long int gtimediff;
  * gtimediff format specifier.
  */
 #ifdef WIN32
-#define GTIMEDIFF_FS "%I64lld"
+#define GTIMEDIFF_FS "%I64d"
 #else
 #define GTIMEDIFF_FS "%lld"
-#endif
-
-#ifdef __cplusplus
-extern "C" {
 #endif
 
 /*
  * Get current time as nanoseconds. Value is monotonic and not bound to system time.
  */
 gtime gtime_gettime();
-
-#ifdef __cplusplus
-}
-#endif
 
 /*
  * Convert gtime to seconds.
@@ -89,5 +85,9 @@ gtime gtime_gettime();
  * Get the microseconds part from gtime.
  */
 #define GTIME_USECPART(T) (GTIME_NSECPART(T) / 1000UL)
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* GTIME_H_ */
