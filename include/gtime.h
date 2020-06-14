@@ -31,7 +31,7 @@ typedef long long int gtimediff;
 /*
  * gtime resolution is  1 nanosecond.
  */
-#define GTIME_RESOLUTION 1000000000UL
+#define GTIME_RESOLUTION 1000000000ULL
 
 /*
  * gtime format specifier.
